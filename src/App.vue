@@ -1,26 +1,44 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div class="bg-red-100 p-4">
-    <h1 class="text-3xl font-bold text-red-700">🌸 Vue Garden Tracker</h1>
-    <p class="text-sm mt-2 text-gray-700">Inspirado por Haru, mi esposa 💖</p>
+  <div
+    class="min-h-screen font-persona flex flex-col items-center p-6"
+    style="background: linear-gradient(135deg, #7a5c99 0%, #e63946 50%, #1d3557 100%);"
+  >
+    <header class="mb-10 text-center text-white drop-shadow-lg">
+      <h1 class="text-4xl font-bold mb-2">🌸 Vue Garden Tracker</h1>
+      <p class="text-lg">Cuida tus plantas con un toque phandev</p>
+    </header>
+
+    <PlantForm @add-plant="addPlant" />
+
+    <PlantList
+      :plants="plants"
+      @toggle-watered="toggleWatered"
+      class="mt-10 max-w-md w-full"
+    />
   </div>
 </template>
 
+<script setup>
+import { ref } from 'vue'
+import PlantList from './components/PlantList.vue'
+import PlantForm from './components/PlantForm.vue'
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+const plants = ref([
+  { id: 1, name: 'Makoto', date: '2000-02-01', watered: false },
+  { id: 2, name: 'Haru', date: '2000-02-01', watered: false },
+])
+
+function addPlant(plant) {
+  plants.value.push({
+    id: Date.now(),
+    name: plant.name,
+    date: plant.date,
+    watered: false,
+  })
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+function toggleWatered(id) {
+  const plant = plants.value.find(p => p.id === id)
+  if (plant) plant.watered = !plant.watered
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+</script>
