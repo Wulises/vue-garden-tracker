@@ -24,8 +24,9 @@ import PlantList from './components/PlantList.vue'
 import PlantForm from './components/PlantForm.vue'
 
 const plants = ref([
-  { id: 1, name: 'Makoto', date: '2000-02-01', watered: false },
-  { id: 2, name: 'Haru', date: '2000-02-01', watered: false },
+  { id: 1, name: 'Sumeri', date: '2000-03-25', watered: false },
+  { id: 2, name: 'Makoto', date: '1998-04-23', watered: false },
+  { id: 3, name: 'Haru', date: '1998-05-12', watered: false },
 ])
 
 function addPlant(plant) {
